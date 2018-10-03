@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018. Lex
+ */
+
 package com.example.forum;
 
 import org.springframework.boot.SpringApplication;
