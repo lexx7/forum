@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>The Affable Bean :: Admin Console</title>
+</head>
+<body>
+
+<div th:fragment="header-login" id="header" class="alt">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="nav navbar-header">
+                <div class="navbar-brand"><a href="/">Forum</a></div>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/registration"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>
