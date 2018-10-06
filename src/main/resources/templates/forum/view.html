@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="fragments/header :: head">...</div>
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header">[Static.proto] ...</div>
+<div id="layout-content" class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading" th:text="#{forum.title}">
+        </div>
+        <div class="panel-body">
+            <a href="/subject/create"><button id="create-subject" th:text="#{forum.button.create}" class="btn btn-primary"></button></a>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer">[Static.proto] ...</div>
+</body>
+</html>

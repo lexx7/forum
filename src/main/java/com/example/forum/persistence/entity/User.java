@@ -4,12 +4,7 @@
 
 package com.example.forum.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -25,13 +20,8 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @NotNull
-    @Pattern(regexp = "^[a-z0-9]*$")
-    @Size(min = 4, max = 20)
     private String name;
 
-    @JsonIgnore
-    @NotNull
     @Column(name = "password_hash", updatable = false)
     private String passwordHash;
 
