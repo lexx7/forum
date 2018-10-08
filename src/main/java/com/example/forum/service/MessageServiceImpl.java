@@ -8,6 +8,7 @@ import com.example.forum.persistence.entity.Message;
 import com.example.forum.persistence.entity.Subject;
 import com.example.forum.persistence.entity.User;
 import com.example.forum.persistence.repository.MessageRepository;
+import com.example.forum.security.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class MessageServiceImpl implements MessageService {
         Subject subject = new Subject();
         subject.setId(subjectId);
         User user = new User();
-        user.setId(Long.valueOf(2));
+        user.setId(SecurityUtils.getCurrentUserId());
         messageRepository.save(new Message(content,
                 subject, user, Instant.now()));
     }

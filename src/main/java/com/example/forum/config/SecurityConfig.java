@@ -37,25 +37,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER").and()
-//                .withUser("admin").password("password").roles("USER", "ADMIN");
-//
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-//                .antMatchers("/").access("hasRole('ADMIN')")
-                //.antMatchers("/admin/**").authenticated()
-                .antMatchers("/*").permitAll()
-                    .and()
-                .formLogin().loginPage("/login").failureUrl("/login?error")
-                    .and()
-                .logout().logoutSuccessUrl("/login");
+//        http
+//                .authorizeRequests()
+////                .antMatchers("/").access("hasRole('ADMIN')")
+////                .antMatchers("/*").access("hasAnyRole('ADMIN', 'USER')")
+//                .antMatchers("/*").permitAll()
+//                    .and()
+//                .formLogin().loginPage("/login").failureUrl("/login?error");
+        http.authorizeRequests()
+                .antMatchers("/webjars/**", "/user/registration").permitAll()
+                .anyRequest().authenticated()
+            .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/login?error")
+                    .permitAll()
+            .and()
+                .logout()
+                    .permitAll();
         http.csrf().disable();
     }
 }

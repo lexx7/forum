@@ -26,9 +26,6 @@ public final class SecurityUtils {
 
     public static final long NONEXISTENT_USER_ID = -1L;
 
-    private SecurityUtils() {
-    }
-
     /**
      * Returns current user login.
      *

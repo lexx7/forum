@@ -33,7 +33,7 @@ public class Role {
     private String name;
 
     @NotNull
-    @ElementCollection(targetClass = Permission.class)
+    @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "permissions", joinColumns = {@JoinColumn(name = "role_id")})
     @Column(name = "permission_id", updatable = false)
     private Set<Permission> permissions;
@@ -41,14 +41,5 @@ public class Role {
     public Role(String name, Set<Permission> permissions) {
         this.name = name;
         this.permissions = permissions;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", permissions=" + permissions +
-                '}';
     }
 }

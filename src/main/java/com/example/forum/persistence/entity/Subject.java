@@ -31,13 +31,4 @@ public class Subject {
         this.title = title;
         this.dateTime = dateTime;
     }
-
-    @Override
-    public String toString() {
-        return "Subject{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", dateTime=" + dateTime +
-                '}';
-    }
 }

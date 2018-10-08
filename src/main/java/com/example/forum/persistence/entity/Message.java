@@ -40,15 +40,4 @@ public class Message {
         this.user = user;
         this.dateTime = dateTime;
     }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", subject=" + subject +
-                ", user=" + user +
-                ", dateTime=" + dateTime +
-                '}';
-    }
 }

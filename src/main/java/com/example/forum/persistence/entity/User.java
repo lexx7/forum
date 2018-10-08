@@ -50,16 +50,4 @@ public class User {
         this.roles = new HashSet<Role>();
         this.roles.add(role);
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
 }

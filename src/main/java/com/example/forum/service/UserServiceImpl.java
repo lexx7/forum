@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void create(String username, String lastName, String firstName, String password) {
         Role role = roleRepository.findByName("USER");
         User user = new User(username, lastName, firstName, passwordEncoder.encode(password), role);
-        log.info(user.toString());
         userRepository.save(user);
+        log.info("User: {} create", username);
     }
 }
