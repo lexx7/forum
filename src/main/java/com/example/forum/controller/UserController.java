@@ -6,6 +6,9 @@ package com.example.forum.controller;
 
 import com.example.forum.constants.ApiConstants;
 import com.example.forum.dto.UserForm;
+import com.example.forum.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RequestMapping(ApiConstants.User.CONTROLLER_MAPPING)
 @Controller
 public class UserController {
+
+    private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(ApiConstants.User.REGISTRATION)
     public String registrationForm(UserForm userForm) {
@@ -28,6 +39,9 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "user/registration";
         }
+        userService.create(userForm.getUsername(), userForm.getLastName(), userForm.getFirstName(),
+                userForm.getPassword());
+
         return "redirect:/login";
     }
 }

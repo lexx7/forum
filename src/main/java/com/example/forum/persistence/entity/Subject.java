@@ -4,24 +4,40 @@
 
 package com.example.forum.persistence.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.Instant;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Subject {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String title;
 
     private Instant dateTime;
+
+    public Subject(String title, Instant dateTime) {
+        this.title = title;
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", dateTime=" + dateTime +
+                '}';
+    }
 }

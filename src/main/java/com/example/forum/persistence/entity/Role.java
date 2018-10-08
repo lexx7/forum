@@ -4,6 +4,10 @@
 
 package com.example.forum.persistence.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -13,11 +17,12 @@ import java.util.Set;
 /**
  * JPA entity describing user role.
  */
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "roles", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Role {
-
-    private static final long serialVersionUID = -3554101614817184171L;
 
     @Id
     private Long id;
@@ -33,35 +38,17 @@ public class Role {
     @Column(name = "permission_id", updatable = false)
     private Set<Permission> permissions;
 
-    public Role() {
-    }
-
     public Role(String name, Set<Permission> permissions) {
         this.name = name;
         this.permissions = permissions;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Permission> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Set<Permission> permissions) {
-        this.permissions = permissions;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", permissions=" + permissions +
+                '}';
     }
 }

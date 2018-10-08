@@ -4,12 +4,13 @@
 
 package com.example.forum.persistence.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.Instant;
 
@@ -17,8 +18,10 @@ import java.time.Instant;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Message {
+
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String content;
@@ -30,4 +33,22 @@ public class Message {
     private User user;
 
     private Instant dateTime;
+
+    public Message(String content, Subject subject, User user, Instant dateTime) {
+        this.content = content;
+        this.subject = subject;
+        this.user = user;
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", subject=" + subject +
+                ", user=" + user +
+                ", dateTime=" + dateTime +
+                '}';
+    }
 }

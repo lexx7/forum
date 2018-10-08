@@ -19,7 +19,6 @@ import java.util.Set;
  */
 public class PermissionUserDetails extends User {
 
-
     private Set<Permission> permissions = new HashSet<>();
     private long userId = SecurityUtils.NONEXISTENT_USER_ID;
 

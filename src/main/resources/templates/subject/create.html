@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:include="fragments/header :: head">...</div>
     <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="fragments/header :: head"></div>
 </head>
 <body>
-<div th:replace="fragments/header :: header">[Static.proto] ...</div>
+<div th:replace="fragments/header :: header"></div>
 <div id="layout-content" class="container">
     <div class="panel panel-default">
         <div class="panel-heading" th:text="#{subject.title}">
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" method="post" th:action="@{/subject/create}" th:object="${subjectForm}">
+            <form class="form-horizontal" method="post" action="#" th:action="@{/subject/create}" th:object="${subjectForm}">
                 <div class="form-group">
                     <label class="control-label col-sm-1" for="title">Title:</label>
                     <div class="col-sm-11">
-                        <input th:field="*{title}" class="form-control" placeholder="Enter title" autofocus="autofocus" />
+                        <input th:field="*{title}" class="form-control" placeholder="Enter title" autofocus="autofocus" required formnovalidate />
                         <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-11">
                         <input class="btn btn-primary" type="submit" th:value="#{subject.button.create}" />
+                        <input class="btn" type="button" onclick="history.back()" th:value="#{subject.button.back}" />
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div th:replace="fragments/footer :: footer">[Static.proto] ...</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

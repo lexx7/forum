@@ -6,7 +6,44 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header">[Static.proto] ...</div>
-<div id="main">
+<div id="layout-content" class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading" th:text="${subject.getTitle()}">
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr class="header">
+                    <th class="col-sm-2">Username</th>
+                    <th class="col-sm-9">Content</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="message : ${messages}">
+                    <th th:text="${message.getUser().getName()}"></th>
+                    <td th:text="${message.getContent()}"></td>
+                    <td th:with="href='/message/delete/'">
+                        <form method="post" th:action="@{${href} + ${message.getId()}}">
+                            <input type="hidden" name="subjectId" th:value="${subject.getId()}" required />
+                            <a onclick="$(this).parent().submit()" style="cursor: pointer"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="#" th:action="@{'/message/create/' + ${subject.getId()}}" th:object="${messageForm}">
+                <div class="form-group">
+                    <div class="col-sm-11">
+                        <input th:field="*{content}" class="form-control"
+                               placeholder="Enter message" autofocus="autofocus" required formnovalidate/>
+                        <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Title error</div>
+                    </div>
+                    <div class="col-sm-1">
+                        <input class="btn btn-primary" type="submit" th:value="#{message.button.send}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div th:replace="fragments/footer :: footer">[Static.proto] ...</div>
 </body>

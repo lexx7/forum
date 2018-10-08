@@ -13,6 +13,24 @@
         <div class="panel-body">
             <a href="/subject/create"><button id="create-subject" th:text="#{forum.button.create}" class="btn btn-primary"></button></a>
         </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr class="header">
+                    <th class="col-sm-8">Title</th>
+                    <th class="col-sm-3">Date Time</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="subject, iter : ${subjects}">
+                    <td th:with="href='/subject/'"><a th:href="@{${href} + ${subject.getId()}}" th:text="${subject.getTitle()}"></a></td>
+                    <td th:text="${subject.getDateTime()}"></td>
+                    <td th:with="href='/subject/delete/'">
+                        <form method="post" th:action="@{${href} + ${subject.getId()}}">
+                            <a onclick="$(this).parent().submit()" style="cursor: pointer"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 <div th:replace="fragments/footer :: footer">[Static.proto] ...</div>

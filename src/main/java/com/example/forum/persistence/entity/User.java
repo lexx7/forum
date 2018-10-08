@@ -4,23 +4,33 @@
 
 package com.example.forum.persistence.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * JPA entity describing user.
  */
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class User {
 
-    private static final long serialVersionUID = 2027317675372583895L;
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
 
     private String name;
+
+    private String firstName;
+
+    private String lastName;
 
     @Column(name = "password_hash", updatable = false)
     private String passwordHash;
@@ -32,44 +42,24 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    public User() {
-    }
-
-    public User(String name, String passwordHash, Set<Role> roles) {
+    public User(String name, String firstName, String lastName, String passwordHash, Role role) {
         this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.passwordHash = passwordHash;
-        this.roles = roles;
+        this.roles = new HashSet<Role>();
+        this.roles.add(role);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }
