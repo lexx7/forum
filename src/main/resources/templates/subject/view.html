@@ -21,7 +21,8 @@
                     <th th:text="${message.getUser().getName()}"></th>
                     <td th:text="${message.getContent()}"></td>
                     <td th:with="href='/message/delete/'">
-                        <form method="post" th:action="@{${href} + ${message.getId()}}">
+                        <form method="post" th:action="@{${href} + ${message.getId()}}"
+                              th:if="${message.getUser().getName() == currentUser || deleteMessages}">
                             <input type="hidden" name="subjectId" th:value="${subject.getId()}" required />
                             <a onclick="$(this).parent().submit()" style="cursor: pointer"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                         </form>

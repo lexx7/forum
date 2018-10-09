@@ -5,6 +5,8 @@
 package com.example.forum.controller;
 
 import com.example.forum.constants.ApiConstants;
+import com.example.forum.persistence.entity.Permission;
+import com.example.forum.security.util.SecurityUtils;
 import com.example.forum.service.SubjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class ForumController {
     @GetMapping({"/", ApiConstants.Forum.VIEW})
     public String view(Model model, @PageableDefault(size = PAGE_SIZE) Pageable pageable) {
         model.addAttribute("page", subjectService.viewAll(pageable));
+        model.addAttribute("deleteSubjects", SecurityUtils.hasPermission(Permission.DELETE_ALL_SUBJECT));
         return ApiConstants.Forum.TEMPLATES_VIEW;
     }
 }

@@ -7,6 +7,8 @@ package com.example.forum.controller;
 import com.example.forum.constants.ApiConstants;
 import com.example.forum.form.MessageForm;
 import com.example.forum.form.SubjectForm;
+import com.example.forum.persistence.entity.Permission;
+import com.example.forum.security.util.SecurityUtils;
 import com.example.forum.service.MessageService;
 import com.example.forum.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class SubjectController {
         model.addAttribute("subject", subjectService.getItem(subjectId));
         model.addAttribute("page", messageService.viewAll(subjectId, pageable));
         model.addAttribute("messageForm", new MessageForm());
+        model.addAttribute("currentUser", SecurityUtils.getCurrentUserLogin());
+        model.addAttribute("deleteMessages", SecurityUtils.hasPermission(Permission.DELETE_ALL_MESSAGE));
         return ApiConstants.Subject.TEMPLATES_VIEW;
     }
 
@@ -59,7 +63,9 @@ public class SubjectController {
 
     @PostMapping(ApiConstants.Subject.DELETE)
     public String delete(@PathVariable Long subjectId) {
-        subjectService.delete(subjectId);
+        if (SecurityUtils.hasPermission(Permission.DELETE_ALL_SUBJECT)) {
+            subjectService.delete(subjectId);
+        }
         return "redirect:" + ApiConstants.Forum.TEMPLATES_VIEW;
     }
 }
