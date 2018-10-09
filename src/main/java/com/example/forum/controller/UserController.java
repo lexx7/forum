@@ -7,8 +7,8 @@ package com.example.forum.controller;
 import com.example.forum.constants.ApiConstants;
 import com.example.forum.form.UserForm;
 import com.example.forum.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +20,10 @@ import javax.validation.Valid;
 @Slf4j
 @RequestMapping(ApiConstants.User.CONTROLLER_MAPPING)
 @Controller
+@AllArgsConstructor
 public class UserController {
 
     private UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping(ApiConstants.User.REGISTRATION)
     public String registrationForm(UserForm userForm) {

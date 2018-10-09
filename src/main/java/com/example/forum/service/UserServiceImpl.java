@@ -5,9 +5,8 @@ import com.example.forum.persistence.entity.User;
 import com.example.forum.persistence.repository.RoleRepository;
 import com.example.forum.persistence.repository.UserRepository;
 import com.example.forum.security.details.PermissionUserDetails;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,23 +24,13 @@ import java.util.stream.Collectors;
  * {@link UserDetailsService} implementation which handles also roles permissions.
  */
 @Slf4j
+@AllArgsConstructor
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserServiceImpl(
-            UserRepository userRepository,
-            RoleRepository roleRepository,
-            @Qualifier("passwordEncoder")
-            PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public UserDetails loadUserByUsername(final String login) {

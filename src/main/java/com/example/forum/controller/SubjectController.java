@@ -11,7 +11,7 @@ import com.example.forum.persistence.entity.Permission;
 import com.example.forum.security.util.SecurityUtils;
 import com.example.forum.service.MessageService;
 import com.example.forum.service.SubjectService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -26,19 +26,15 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(ApiConstants.Subject.CONTROLLER_MAPPING)
+@AllArgsConstructor
 public class SubjectController {
+    private static final int PAGE_SIZE = 10;
 
     private SubjectService subjectService;
     private MessageService messageService;
 
-    @Autowired
-    public SubjectController(SubjectService subjectService, MessageService messageService) {
-        this.subjectService = subjectService;
-        this.messageService = messageService;
-    }
-
     @GetMapping(ApiConstants.Subject.PATH_VIEW)
-    public String view(@PathVariable Long subjectId, Model model, @PageableDefault(size = 5) Pageable pageable) {
+    public String view(@PathVariable Long subjectId, Model model, @PageableDefault(size = PAGE_SIZE) Pageable pageable) {
         model.addAttribute("subject", subjectService.getItem(subjectId));
         model.addAttribute("page", messageService.viewAll(subjectId, pageable));
         model.addAttribute("messageForm", new MessageForm());

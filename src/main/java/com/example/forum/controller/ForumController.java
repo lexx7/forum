@@ -8,8 +8,8 @@ import com.example.forum.constants.ApiConstants;
 import com.example.forum.persistence.entity.Permission;
 import com.example.forum.security.util.SecurityUtils;
 import com.example.forum.service.SubjectService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -20,16 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping({"/", ApiConstants.Forum.CONTROLLER_MAPPING})
+@AllArgsConstructor
 public class ForumController {
-
     private static final int PAGE_SIZE = 10;
 
     private SubjectService subjectService;
-
-    @Autowired
-    public ForumController(SubjectService subjectService) {
-        this.subjectService = subjectService;
-    }
 
     @GetMapping({"/", ApiConstants.Forum.VIEW})
     public String view(Model model, @PageableDefault(size = PAGE_SIZE) Pageable pageable) {

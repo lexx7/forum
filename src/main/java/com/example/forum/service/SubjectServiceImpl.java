@@ -6,22 +6,18 @@ package com.example.forum.service;
 
 import com.example.forum.persistence.entity.Subject;
 import com.example.forum.persistence.repository.SubjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 
+@AllArgsConstructor
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
     private SubjectRepository subjectRepository;
-
-    @Autowired
-    public SubjectServiceImpl(SubjectRepository subjectRepository) {
-        this.subjectRepository = subjectRepository;
-    }
 
     @Override
     public void create(String title) {

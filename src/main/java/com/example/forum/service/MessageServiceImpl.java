@@ -9,22 +9,18 @@ import com.example.forum.persistence.entity.Subject;
 import com.example.forum.persistence.entity.User;
 import com.example.forum.persistence.repository.MessageRepository;
 import com.example.forum.security.util.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 
+@AllArgsConstructor
 @Service
 public class MessageServiceImpl implements MessageService {
 
     private MessageRepository messageRepository;
-
-    @Autowired
-    public MessageServiceImpl(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
 
     @Override
     public Page<Message> viewAll(Long subjectId, Pageable pageable) {
