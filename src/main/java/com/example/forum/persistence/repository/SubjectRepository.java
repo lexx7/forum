@@ -10,5 +10,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface SubjectRepository extends PagingAndSortingRepository<Subject, Long> {
-    Page<Subject> findAllByOrderByMessagesDateTimeDesc(Pageable pageable);
+    Page<Subject> findByOrderByDateTimeLastMessageDesc(Pageable pageable);
 }

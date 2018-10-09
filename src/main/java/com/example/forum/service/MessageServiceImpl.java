@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 
 @AllArgsConstructor
@@ -21,6 +22,7 @@ import java.time.Instant;
 public class MessageServiceImpl implements MessageService {
 
     private MessageRepository messageRepository;
+    private SubjectService subjectService;
 
     @Override
     public Page<Message> viewAll(Long subjectId, Pageable pageable) {
@@ -28,13 +30,15 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @Transactional
     public void create(String content, Long subjectId) {
-        Subject subject = new Subject();
-        subject.setId(subjectId);
+        Subject subject = subjectService.getItem(subjectId);
         User user = new User();
         user.setId(SecurityUtils.getCurrentUserId());
-        messageRepository.save(new Message(content,
-                subject, user, Instant.now()));
+        Message message = new Message(content, subject, user, Instant.now());
+        messageRepository.save(message);
+        subject.setDateTimeLastMessage(message.getDateTime());
+        subjectService.save(subject);
     }
 
     @Override

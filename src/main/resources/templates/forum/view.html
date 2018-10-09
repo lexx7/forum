@@ -21,7 +21,7 @@
                 </tr>
                 <tr th:each="subject : ${page}">
                     <td th:with="href='/subject/'"><a th:href="@{${href} + ${subject.getId()}}" th:text="${subject.getTitle()}"></a></td>
-                    <td th:text="${subject.getDateTime()}"></td>
+                    <td th:text="${subject.getDateTimeLastMessage()}"></td>
                     <td th:with="href='/subject/delete/'">
                         <form method="post" th:action="@{${href} + ${subject.getId()}}" th:if="${deleteSubjects}">
                             <a onclick="$(this).parent().submit()" style="cursor: pointer"><span class="glyphicon glyphicon-trash"></span> Delete</a>

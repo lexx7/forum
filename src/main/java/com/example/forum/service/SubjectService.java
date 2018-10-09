@@ -39,4 +39,6 @@ public interface SubjectService {
      * @return
      */
     Subject getItem(Long subjectId);
+
+    void save(Subject subject);
 }

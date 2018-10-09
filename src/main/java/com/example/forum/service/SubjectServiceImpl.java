@@ -27,7 +27,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Page<Subject> viewAll(Pageable pageable) {
-        return subjectRepository.findAllByOrderByMessagesDateTimeDesc(pageable);
+        return subjectRepository.findByOrderByDateTimeLastMessageDesc(pageable);
     }
 
     @Override
@@ -38,5 +38,10 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public Subject getItem(Long subjectId) {
         return subjectRepository.findById(subjectId).get();
+    }
+
+    @Override
+    public void save(Subject subject) {
+        subjectRepository.save(subject);
     }
 }

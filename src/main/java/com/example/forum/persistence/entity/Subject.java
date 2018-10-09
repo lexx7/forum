@@ -24,13 +24,13 @@ public class Subject {
 
     private String title;
 
-    private Instant dateTime;
+    private Instant dateTimeLastMessage;
 
     @OneToMany(mappedBy = "subject")
     private List<Message> messages;
 
-    public Subject(String title, Instant dateTime) {
+    public Subject(String title, Instant dateTimeLastMessage) {
         this.title = title;
-        this.dateTime = dateTime;
+        this.dateTimeLastMessage = dateTimeLastMessage;
     }
 }
