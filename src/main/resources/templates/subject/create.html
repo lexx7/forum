@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <title>New subject</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <div th:replace="fragments/header :: head"></div>
 </head>
@@ -9,8 +9,7 @@
 <div th:replace="fragments/header :: header"></div>
 <div id="layout-content" class="container">
     <div class="panel panel-default">
-        <div class="panel-heading" th:text="#{subject.title}">
-        </div>
+        <div class="panel-heading">New subject</div>
         <div class="panel-body">
             <form class="form-horizontal" method="post" action="#" th:action="@{/subject/create}" th:object="${subjectForm}">
                 <div class="form-group">
@@ -22,8 +21,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-11">
-                        <input class="btn btn-primary" type="submit" th:value="#{subject.button.create}" />
-                        <input class="btn" type="button" onclick="history.back()" th:value="#{subject.button.back}" />
+                        <input class="btn btn-primary" type="submit" value="Create" />
+                        <input class="btn" type="button" onclick="history.back()" value="Back" />
                     </div>
                 </div>
             </form>

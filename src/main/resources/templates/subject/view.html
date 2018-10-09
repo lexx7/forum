@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:include="fragments/header :: head">...</div>
-    <title>Title</title>
+    <title>Subject</title>
 </head>
 <body>
 <div th:replace="fragments/header :: header">[Static.proto] ...</div>
@@ -53,7 +53,7 @@
                         <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Title error</div>
                     </div>
                     <div class="col-sm-1">
-                        <input class="btn btn-primary" type="submit" th:value="#{message.button.send}" />
+                        <input class="btn btn-primary" type="submit" value="Send" />
                     </div>
                 </div>
             </form>

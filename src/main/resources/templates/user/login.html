@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{title.login}"/>
+    <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="utf-8" />
     <div th:include="fragments/header :: head"></div>
@@ -11,8 +11,7 @@
     <div th:replace="user/fragments/header :: header">[Static.proto] ...</div>
     <div id="layout-content" class="container">
         <div class="panel panel-default">
-            <div class="panel-heading" th:text="#{title.login}">
-            </div>
+            <div class="panel-heading">Login</div>
             <div class="panel-body">
                 <form class="form-horizontal" method="post" th:action="@{/login}">
                     <div class="form-group">
@@ -31,17 +30,15 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <input class="btn btn-default" type="submit" value="Войти" />
+                            <input class="btn btn-default" type="submit" value="Sing in" />
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <p th:if="${param.logout}" class="alert alert-info" th:text="#{msg.login.logout}">You have
-            been logged out</p>
+        <p th:if="${param.logout}" class="alert alert-info">You have been logged out</p>
 
-        <p th:if="${param.error}" class="alert alert-danger" th:text="#{msg.login.login_error}">No
-            such user, please try again</p>
+        <p th:if="${param.error}" class="alert alert-danger">No such user, please try again</p>
     </div>
     <div th:replace="fragments/footer :: footer">[Static.proto] ...</div>
 </body>

@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:include="fragments/header :: head"></div>
-    <title th:text="#{title.user.registration}"></title>
+    <title>New user registration</title>
 </head>
 <body>
-    <div th:include="user/fragments/header :: header">...</div>
+    <div th:include="user/fragments/header :: header"></div>
     <div id="layout-content" class="container">
         <div class="panel panel-default">
-            <div class="panel-heading" th:text="#{title.user.registration}">
-            </div>
+            <div class="panel-heading">New user registration</div>
             <div class="panel-body">
                 <form class="form-horizontal" method="post" th:action="@{/user/registration}" th:object="${userForm}">
                     <p class="alert alert-danger"
