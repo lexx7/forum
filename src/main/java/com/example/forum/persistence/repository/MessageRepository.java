@@ -5,10 +5,10 @@
 package com.example.forum.persistence.repository;
 
 import com.example.forum.persistence.entity.Message;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.util.List;
-
-public interface MessageRepository extends JpaRepository<Message, Long> {
-    public List<Message> findAllBySubjectId(Long subjectId);
+public interface MessageRepository extends PagingAndSortingRepository<Message, Long> {
+    public Page<Message> findAllBySubjectIdOrderByDateTimeDesc(Long subjectId, Pageable pageable);
 }

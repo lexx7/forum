@@ -11,13 +11,13 @@
         <div class="panel-heading" th:text="${subject.getTitle()}">
         </div>
         <div class="panel-body">
-            <table class="table">
+            <table class="table table-striped">
                 <tr class="header">
                     <th class="col-sm-2">Username</th>
                     <th class="col-sm-9">Content</th>
                     <th>Action</th>
                 </tr>
-                <tr th:each="message : ${messages}">
+                <tr th:each="message : ${page}">
                     <th th:text="${message.getUser().getName()}"></th>
                     <td th:text="${message.getContent()}"></td>
                     <td th:with="href='/message/delete/'">
@@ -28,6 +28,20 @@
                     </td>
                 </tr>
             </table>
+            <ul class="pagination" th:if="${page.totalPages > 0}">
+                <li th:if="${page.hasPrevious()}">
+                    <a th:href="@{/(page=${page.number-1},size=${page.size})}">Previous</a>
+                </li>
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <li th:if="${page.number == i}" class="active"><a href="#">[[${i}+1]]</a></li>
+                    <li th:unless="${page.number == i}">
+                        <a th:href="@{/(page=${i},size=${page.size})}">[[${i}+1]]</a>
+                    </li>
+                </th:block>
+                <li th:if="${page.hasNext()}">
+                    <a th:href="@{/(page=${page.number+1},size=${page.size})}">Next</a>
+                </li>
+            </ul>
         </div>
         <div class="panel-body">
             <form method="post" action="#" th:action="@{'/message/create/' + ${subject.getId()}}" th:object="${messageForm}">

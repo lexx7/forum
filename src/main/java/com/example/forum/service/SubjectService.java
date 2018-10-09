@@ -5,8 +5,8 @@
 package com.example.forum.service;
 
 import com.example.forum.persistence.entity.Subject;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface SubjectService {
 
@@ -21,8 +21,9 @@ public interface SubjectService {
      * View all subjects
      *
      * @return
+     * @param pageable
      */
-    public List<Subject> viewAll();
+    public Page<Subject> viewAll(Pageable pageable);
 
     /**
      * Subject delete with subjectId

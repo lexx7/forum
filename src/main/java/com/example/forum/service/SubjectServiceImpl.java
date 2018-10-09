@@ -7,11 +7,11 @@ package com.example.forum.service;
 import com.example.forum.persistence.entity.Subject;
 import com.example.forum.persistence.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -30,8 +30,8 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public List<Subject> viewAll() {
-        return subjectRepository.findAll(Sort.by(Sort.Direction.DESC, "dateTime"));
+    public Page<Subject> viewAll(Pageable pageable) {
+        return subjectRepository.findAllByOrderByMessagesDateTimeDesc(pageable);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Subject getItem(Long subjectId) {
-        return subjectRepository.getOne(subjectId);
+        return subjectRepository.findById(subjectId).get();
     }
 }

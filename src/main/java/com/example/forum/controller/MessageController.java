@@ -5,11 +5,17 @@
 package com.example.forum.controller;
 
 import com.example.forum.constants.ApiConstants;
-import com.example.forum.dto.MessageForm;
+import com.example.forum.form.MessageForm;
 import com.example.forum.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(ApiConstants.Message.CONTROLLER_MAPPING)
@@ -23,8 +29,10 @@ public class MessageController {
     }
 
     @PostMapping(ApiConstants.Message.PATH_CREATE)
-    public String create(@PathVariable Long subjectId, MessageForm messageForm) {
-        messageService.create(messageForm.getContent(), subjectId);
+    public String create(@PathVariable Long subjectId, @Valid MessageForm messageForm, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            messageService.create(messageForm.getContent(), subjectId);
+        }
         return "redirect:/" + ApiConstants.Subject.CONTROLLER_MAPPING + "/" + subjectId;
     }
 

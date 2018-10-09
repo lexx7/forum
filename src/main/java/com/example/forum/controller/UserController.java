@@ -5,7 +5,7 @@
 package com.example.forum.controller;
 
 import com.example.forum.constants.ApiConstants;
-import com.example.forum.dto.UserForm;
+import com.example.forum.form.UserForm;
 import com.example.forum.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "user/registration";
         }
-        userService.create(userForm.getUsername(), userForm.getLastName(), userForm.getFirstName(),
+        userService.create(userForm.getUsername().toLowerCase(), userForm.getLastName(), userForm.getFirstName(),
                 userForm.getPassword());
 
         return "redirect:/login";

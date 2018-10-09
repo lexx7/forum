@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2018. Lex
- */
-
 package com.example.forum.service;
-
 
 import com.example.forum.persistence.entity.Role;
 import com.example.forum.persistence.entity.User;
@@ -22,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -69,5 +65,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = new User(username, lastName, firstName, passwordEncoder.encode(password), role);
         userRepository.save(user);
         log.info("User: {} create", username);
+    }
+
+    @Override
+    public User findByUsername(String username) throws NoSuchElementException {
+        return userRepository.findOneByName(username).get();
     }
 }

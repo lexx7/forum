@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Lex
  */
 
-package com.example.forum.dto;
+package com.example.forum.form;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

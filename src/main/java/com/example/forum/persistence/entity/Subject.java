@@ -8,10 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Setter
@@ -26,6 +25,9 @@ public class Subject {
     private String title;
 
     private Instant dateTime;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Message> messages;
 
     public Subject(String title, Instant dateTime) {
         this.title = title;

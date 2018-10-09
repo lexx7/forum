@@ -5,8 +5,8 @@
 package com.example.forum.service;
 
 import com.example.forum.persistence.entity.Message;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface MessageService {
 
@@ -14,9 +14,10 @@ public interface MessageService {
      * All message with subject id
      *
      * @param subjectId
+     * @param pageable
      * @return
      */
-    public List<Message> viewAll(Long subjectId);
+    public Page<Message> viewAll(Long subjectId, Pageable pageable);
 
     /**
      * Create message with subjectId

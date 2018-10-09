@@ -8,10 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -26,10 +23,11 @@ public class Message {
 
     private String content;
 
-    @ManyToOne(targetEntity = Subject.class)
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
     private Subject subject;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne
     private User user;
 
     private Instant dateTime;

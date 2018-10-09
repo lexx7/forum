@@ -12,6 +12,10 @@
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" method="post" th:action="@{/user/registration}" th:object="${userForm}">
+                    <p class="alert alert-danger"
+                       th:if="${#fields.hasGlobalErrors()}"
+                       th:each="error : ${#fields.errors('global')}"
+                       th:text="${error}">Validation error</p>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="lastName">Last name:</label>
                         <div class="col-sm-10">

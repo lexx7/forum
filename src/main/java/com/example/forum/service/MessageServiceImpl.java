@@ -10,10 +10,11 @@ import com.example.forum.persistence.entity.User;
 import com.example.forum.persistence.repository.MessageRepository;
 import com.example.forum.security.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -26,8 +27,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> viewAll(Long subjectId) {
-        return messageRepository.findAllBySubjectId(subjectId);
+    public Page<Message> viewAll(Long subjectId, Pageable pageable) {
+        return messageRepository.findAllBySubjectIdOrderByDateTimeDesc(subjectId, pageable);
     }
 
     @Override

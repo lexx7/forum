@@ -14,13 +14,13 @@
             <a href="/subject/create"><button id="create-subject" th:text="#{forum.button.create}" class="btn btn-primary"></button></a>
         </div>
         <div class="panel-body">
-            <table class="table">
+            <table class="table table-striped">
                 <tr class="header">
                     <th class="col-sm-8">Title</th>
                     <th class="col-sm-3">Date Time</th>
                     <th>Action</th>
                 </tr>
-                <tr th:each="subject, iter : ${subjects}">
+                <tr th:each="subject : ${page}">
                     <td th:with="href='/subject/'"><a th:href="@{${href} + ${subject.getId()}}" th:text="${subject.getTitle()}"></a></td>
                     <td th:text="${subject.getDateTime()}"></td>
                     <td th:with="href='/subject/delete/'">
@@ -30,6 +30,20 @@
                     </td>
                 </tr>
             </table>
+            <ul class="pagination" th:if="${page.totalPages > 0}">
+                <li th:if="${page.hasPrevious()}">
+                    <a th:href="@{/(page=${page.number-1},size=${page.size})}">Previous</a>
+                </li>
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <li th:if="${page.number == i}" class="active"><a href="#">[[${i}+1]]</a></li>
+                    <li th:unless="${page.number == i}">
+                        <a th:href="@{/(page=${i},size=${page.size})}">[[${i}+1]]</a>
+                    </li>
+                </th:block>
+                <li th:if="${page.hasNext()}">
+                    <a th:href="@{/(page=${page.number+1},size=${page.size})}">Next</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
