@@ -24,7 +24,7 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
 #FORUM
-  - export CONFIG=lexx7/forum
+  - export CONFIG=lexhigh/forum
   - docker build -t $CONFIG:$COMMIT
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
