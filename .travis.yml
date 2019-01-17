@@ -24,10 +24,10 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
 #FORUM
-  - export CONFIG=$DOCKER_USER/forum
-  - docker build -t $CONFIG:$COMMIT ./
-  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
-  - docker push $CONFIG
+  - export FORUM=$DOCKER_USER/forum
+  - docker build -t $FORUM:$COMMIT ./
+  - docker tag $FORUM:$COMMIT $FORUM:$TAG
+  - docker push $FORUM:$TAG
 
 notifications:
   email:
