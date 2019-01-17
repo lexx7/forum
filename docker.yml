@@ -1,0 +1,8 @@
+postgresql:
+  image: postgresql
+  container_name: bitnami/postgresql
+  environment:
+    POSTGRESQL_USERNAME: postgres
+    POSTGRESQL_PASSWORD: postgres
+  ports:
+  - '5432:5432'

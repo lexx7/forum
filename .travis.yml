@@ -1,0 +1,27 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk: oraclejdk8
+
+env:
+  global:
+    - secure: "YZqFoM+/NPXRZf8c954SBGhuv7wYifv14H0ltRdRp2+VigbDNvUKe3i9F0suSpXsjrRipkildHWTcvy49FcYU2lF8e3o++w3Fvea5BbgpsswkLOGolGJVzWtYc+W8q71ajLpinJwmS2OS4ry4KF6MMZXWnuPPi2zQzECv4JeFYS5Y/VVIM4U7SZBZStihudANEdHRMGXVWmr/0nnBE+9twSUQCjnMYrpPom1jClghOiCiy/kzmRJcHF64kWdFobzCB6ZTtsP+IhKZkJML9VYuopTfp8p58252aSEAy4LynkrQFnAjq6prOkC2+C9lPlqi+CEjHQpD0BIhf2lb9EyGxQifq0hTDN5xP7vRMi/Hkg2wmbGgHSbz845OPDR6M5DVCP8QZkuFmIUBqAAu4YAUcZC1vXXCiqK7Rk727q6n7lD+YQBYfd+7a4QtScEZ65plPeN1qykCG5xy98CvYwKVSBoTEY6UJ7rNr0YrWglWW90NjNtdvSTtxzEsP+lq9lPcMznEYgss6cMRhriK8JsRF3ghVVpn/EiIpZyiXczB8lP9xJ1MNFGbZGFdgiBfsKjmA4dO2eHy5Wvc/hCasFCH/0qQX6rxEQ1IO7VjroSA2FqfP35RaPOxtnwT9nzYlfgokdUxO/J7wa0imMbWbZf7EeZuIcBk4o8ex/+6/BHd20=" #DOCKER_EMAIL
+    - secure: "kWDEy+R+v/u9OvDLQiT0Xb2HZeXK9YNZkapXv9ToWUF+C0O0M1rYe1lGW0kcZUfKwcSDwM5Fh4P96UidGMIrPmGDc1Iu3/DrNd6zpk2/R7hzBNhr2sz4fZ1hYb05cSEEqfXdzBs9VEszikSX7/XUU/zCSRU9aPdTejFWhJtvU44j3zq/b5ILq3c4ZdDo87ESNOQe34HvLQJwJE+oBbgT+FZu9045xKsxAMT/dKGm0nD8Z6WlVo5p4q9rrPwtTHDuFWoR7/ZZMP2sw8OwjgMM0L4bOuSkxeexnFC1OMB09xYOxNrERfcSf022LadNMnb6Rn7Q3fA6JvJQ24x5Ggsb/OH9XGT3hxABTmYQ1yleAErnj5o/IH/wiYdOlawzQr2CxG32DlV74xIIsHO0szZMsQDnY1pAi2jCsr/GJ//WlO63XaoWakI61jX0o3Bi7pHOJSxYtufz6jiUgcj9yRqHBEZb8cMAj/SSMnA7s9hm1oCGGxpB8/ChVREk1njCrQmTcyQ2vFXCLxKr6BvhaOdxbTxuKNWuWN6XObJqepsr0iNc7LYv8jJ6pQKu66LKMFXLeYbsPd8UKxHBvfyXwOxRgHgZOhK3FGUivhmUWsdS8CZo+2dAsPrpZYKz/am2Qx300Yq04NBksYsk+fNk0dd0RKSKKSw9rjQ6u5QYL0cd2R4=" #DOCKER_USER
+    - secure: "NT9dnjXzOT7b4bg8LKFc1jxAUNvJwhgHtyn7ceLwYhttYCoGByt6UQdxab0rflxRqqO5VcWwMwHTAlC9hgEfOF6GygIjOFCwln5QZGqjcddURv6/zIb4qZ1iSEPjPpVs6cBiI2TZz/nQEfbE76WYVVNtwaFlNhjhOJF4QUpDzT3fDxarx59IM9QfbVaKE4OseL4MDygWOSB1ZAGh/9d6LdfQmb1/NFfyGZ5cknR0im4SdcsgI78SYY+f8KsY2/xU5F0Q8EhhhMScbkYZ9WuBVt7T8vD47UJXkrgaArgGof/rtHPpmqHaJBa+waFZLGdUuNr+B0Ve0wNZ5bGCUyIsZtrslGYyNr8ECOXQLloTCqGOhRY7QXY94DduClhcCBQW+rSB6/9/Xwc//8Q9U3/+sePRU0PZwjaZty6QYovXz6OWQgnZGhpjyUrWw+nuHaEmd79TXtljkDDtV1gLDVDAMowzHrUgBOqRIpdOccKhQrq8pNfbTqKEzZTe2jOys1oAKxej0YXSKczkd/Ijq25snr0MY135EfTbgfmt78fmxvn1uuJS4oOmtMLSi3w0wthL8fjsKlP+Ggs8n9v2s755yUuoK1Yzws3sI+rymolKYrAktpLJQzmJV/QvWvppezpv+ReD6PUmFOZSRhQzAvTat1xQd1lTirUtWjyLmSEDR84=" #DOCKER_PASS
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+#TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+#FORUM
+  - export CONFIG=lexx7/forum
+  - docker build -t $CONFIG:$COMMIT ./
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
