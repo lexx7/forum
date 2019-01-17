@@ -22,6 +22,6 @@ after_success:
 
 #FORUM
   - export CONFIG=lexx7/forum
-  - docker build -t $CONFIG:$COMMIT ./
+  - docker build -t $CONFIG:$COMMIT
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
