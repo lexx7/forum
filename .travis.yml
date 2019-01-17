@@ -13,6 +13,9 @@ env:
     - secure: "NT9dnjXzOT7b4bg8LKFc1jxAUNvJwhgHtyn7ceLwYhttYCoGByt6UQdxab0rflxRqqO5VcWwMwHTAlC9hgEfOF6GygIjOFCwln5QZGqjcddURv6/zIb4qZ1iSEPjPpVs6cBiI2TZz/nQEfbE76WYVVNtwaFlNhjhOJF4QUpDzT3fDxarx59IM9QfbVaKE4OseL4MDygWOSB1ZAGh/9d6LdfQmb1/NFfyGZ5cknR0im4SdcsgI78SYY+f8KsY2/xU5F0Q8EhhhMScbkYZ9WuBVt7T8vD47UJXkrgaArgGof/rtHPpmqHaJBa+waFZLGdUuNr+B0Ve0wNZ5bGCUyIsZtrslGYyNr8ECOXQLloTCqGOhRY7QXY94DduClhcCBQW+rSB6/9/Xwc//8Q9U3/+sePRU0PZwjaZty6QYovXz6OWQgnZGhpjyUrWw+nuHaEmd79TXtljkDDtV1gLDVDAMowzHrUgBOqRIpdOccKhQrq8pNfbTqKEzZTe2jOys1oAKxej0YXSKczkd/Ijq25snr0MY135EfTbgfmt78fmxvn1uuJS4oOmtMLSi3w0wthL8fjsKlP+Ggs8n9v2s755yUuoK1Yzws3sI+rymolKYrAktpLJQzmJV/QvWvppezpv+ReD6PUmFOZSRhQzAvTat1xQd1lTirUtWjyLmSEDR84=" #DOCKER_PASS
     - COMMIT=${TRAVIS_COMMIT::7}
 
+before_install:
+- chmod +x mvnw
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
