@@ -1,0 +1,17 @@
+version: '1.0'
+services:
+  forum-postgresql:
+    image: bitnami/postgresql
+    restart: always
+    environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: postgres
+    ports:
+    - '5432:5432'
+  forum:
+    image: lexhigh/forum
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
